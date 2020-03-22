@@ -1,0 +1,22 @@
+/* NextButton */
+
+.nextbutton {
+  position: absolute;
+  width: 295px;
+  height: 50px;
+  left: 40px;
+  top: 528px;
+  background: #48b07a;
+}
+
+/* NextButtonText */
+
+.nextbuttontext {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #ffffff;
+}

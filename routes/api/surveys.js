@@ -4,10 +4,33 @@ const { check, validationResult } = require('express-validator');
 
 const Survey = require('../../models/Survey');
 
+router.get('/test', (req, res) => {
+  res.send({ greeting: 'THIS IS THE VALUE FOR MESSAGE KEY' });
+  console.log('it worked');
+});
+
+router.get('/default', async (req, res) => {
+  const survey = await Survey.findOne({ surveyName: 'default4' });
+
+  console.log(survey.surveyTagLine);
+
+  res.send({ survey });
+});
+
 // @route   GET api/surveys
-// @desc    Get all surveys
+// @desc    Get demo survey
 // @access  Public
-router.get('/', (req, res) => res.send('Get all surveys route'));
+router.get('/demo', async (req, res) => {
+  console.log('trying...!');
+
+  const survey = await Survey.findOne({ surveyName: 'demo' });
+
+  console.log(survey);
+  //return res.send(survey);
+  return res.json(survey);
+
+  //return res.send('hi there');
+});
 
 // @route   POST api/surveys
 // @desc    Create a new survey
@@ -46,7 +69,10 @@ router.post(
       await survey.save();
 
       res.send('Survey created!');
-    } catch (err) {}
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
   }
 );
 
