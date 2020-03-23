@@ -1,4 +1,4 @@
-import React, { Text } from 'react';
+import React from 'react';
 import NextButton from './NextButton';
 import EndHeader from './EndHeader';
 import ScoreSlider from './ScoreSlider';

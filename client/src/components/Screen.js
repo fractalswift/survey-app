@@ -8,8 +8,7 @@ import Endscreen from './Endscreen';
 
 export default class Screen extends Component {
   render() {
-    // destructure props except for goToNextScreen and currentScreen
-    // which don't work if you do that for some reason
+    // destructure props
     const {
       screenType,
       tagLine,
@@ -24,6 +23,7 @@ export default class Screen extends Component {
 
     console.log(`sectionName from Screen: ${sectionName}`);
 
+    // conditional rendering based on screen type (from survey schema)
     switch (screenType) {
       case 'description':
         return (
@@ -68,6 +68,8 @@ export default class Screen extends Component {
             sectionName={sectionName}
           />
         );
+      default:
+        break;
     }
   }
 }

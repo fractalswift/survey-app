@@ -13,7 +13,7 @@ class Question extends Component {
   };
 
   chooseAnswer = buttonNum => {
-    // only one answer can be selected to we wipe them all first
+    // only one answer can be selected so we wipe them all first
     this.setState({
       button1: 'buttonready',
       button2: 'buttonready',
@@ -39,7 +39,8 @@ class Question extends Component {
         break;
     }
   };
-
+  // function for resetting all buttons - Next button invokes this when
+  // we move to next screen so button does not remain depressed
   resetButtons = () => {
     this.setState({
       button1: 'buttonready',
@@ -54,12 +55,8 @@ class Question extends Component {
       question,
       goToNextScreen,
       currentScreen,
-      countQuestions,
-      questionNum,
-      answers
+      countQuestions
     } = this.props;
-
-    console.log(`questoinNum from Questoin: ${questionNum}`);
 
     return (
       <div>

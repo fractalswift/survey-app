@@ -3,8 +3,6 @@ import Button from './Button';
 
 export default class ButtonsPanel extends Component {
   render() {
-    const answers = this.props.answers;
-
     return (
       <div className='buttons-panel'>
         <Button

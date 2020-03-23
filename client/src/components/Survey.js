@@ -1,8 +1,7 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { Component, Fragment } from 'react';
 import Screen from './Screen';
 
-// cheat object in case problems with async fetch
+// TODO cheat object in case problems with async fetch
 const screens = [
   {
     screenNumber: 0,
@@ -213,6 +212,7 @@ class Survey extends Component {
     this.setState({ questionNum: this.state.questionNum + 1 });
   };
 
+  // Fetch survey from back end
   async componentWillMount() {
     const getSurveyData = async () => {
       const response = await fetch('http://localhost:5000/api/surveys/basic');
@@ -226,7 +226,6 @@ class Survey extends Component {
     console.log(this.state.screens);
     console.log('logging cheat.screens');
     console.log(screens);
-    console.log(screens == this.state.screens);
     console.log(screens[0]);
     console.log(this.state.screens[0]);
   }

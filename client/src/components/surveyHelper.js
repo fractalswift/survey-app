@@ -1,1 +1,0 @@
-surveyHelper.js;
