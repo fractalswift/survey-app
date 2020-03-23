@@ -1,198 +1,245 @@
-import React, { Component, Fragment } from 'react';
-
+import React, { Component, Fragment, useState, useEffect } from 'react';
+import axios from 'axios';
 import Screen from './Screen';
 
-/// helper function to get questions from backend
-// for now its a dummy object:
-
-const surveyData = {
-  survey: {
-    section_0: {
-      title: 'description',
-      screenContent: 'This is the description page',
-      surveyTagLine: 'Survey tagline',
-      surveyDescription: 'Survey description'
-    },
-
-    section_1: {
-      title: 'Section 1',
-      questions: ['Question 1', 'Question 2', 'Question 3', 'Question 4'],
-      endScreenMessage: 'End screen message for section 1'
-    },
-    section_2: {
-      title: 'Section 2',
-      question_1: 'Question 1',
-      question_2: 'Question 2',
-      question_3: 'Question 3',
-      question_4: 'Question 4',
-      endScreenMessage: 'End screen message for section 2'
-    },
-    section_3: {
-      title: 'Section 3',
-      question_1: 'Question 1',
-      question_2: 'Question 2',
-      question_3: 'Question 3',
-      question_4: 'Question 4',
-      endScreenMessage: 'End screen message for section 3'
-    },
-    section_4: {
-      title: 'Section 3',
-      question_1: 'Question 1',
-      question_2: 'Question 2',
-      question_3: 'Question 3',
-      question_4: 'Question 4',
-      endScreenMessage: 'End screen message for section 4'
-    },
-
-    _id: '5e7771830ae39916b5ac507b',
-    surveyName: 'default4',
-    date: '2020-03-22T14:09:07.026Z',
-    __v: 0
-  }
-};
-
-/// Someow have to get the survey object into screens. Think
-// about how to strucure the model to make this easy, so I can just
-// map it
-
+// cheat object in case problems with async fetch
 const screens = [
   {
     screenNumber: 0,
     screenType: 'description',
-    tagLine: 'This is the tagline',
-    description: 'this is the description'
+    tagLine: 'Calculate your personal Pawprint',
+    description:
+      'Next we have a short 2–3 minute survey covering Diet, Home, Travel, and Other that will let us calculate your personal carbon footprint (or Parprint as we like to call it).'
   },
   {
     screenNumber: 1,
     screenType: 'question',
-    question: 'This is question 1'
+    sectionName: 'Diet',
+    question: 'How often do you eat meat and dairy?',
+    answers: ['Daily', '1 or 2 times', '3+ times per week', 'Not at all']
   },
   {
     screenNumber: 2,
     screenType: 'question',
-    question: 'This is question 2'
+    sectionName: 'Diet',
+    question: 'How big are your portion sizes?',
+    answers: [
+      'Smaller than average',
+      'Average',
+      'Larger than average',
+      "I'm not sure"
+    ]
   },
   {
     screenNumber: 3,
     screenType: 'question',
-    question: 'This is question 3'
+    sectionName: 'Diet',
+    question: 'How much food ends up wasted in your household?',
+    answers: [
+      'None',
+      '1-5 plates per week',
+      '6-10 plates per week',
+      'More than 10 plates per week'
+    ]
   },
   {
     screenNumber: 4,
     screenType: 'question',
-    question: 'This is question 4'
+    sectionName: 'Diet',
+    question:
+      'How often do you eat avocados, asparagus, kiwi fruit or pineapple?',
+    answers: ['Daily', '1 or 2 times', '3+ times per week', 'Not at all']
   },
   {
     screenNumber: 5,
-    screenType: 'endscreen',
-    topFact: 'This the top fact',
-    yourResult: 'This is your result',
-    continueText: "Let's take a look at how you do in the home category"
+    screenType: 'question',
+    sectionName: 'Diet',
+    question: 'How often do you eat seasonal veg from Europe?',
+    answers: ['Daily', '1 or 2 times', '3+ times per week', 'Not at all']
   },
   {
     screenNumber: 6,
-    screenType: 'question',
-    question: 'This is question 1'
+    screenType: 'endscreen',
+    sectionName: 'Diet',
+    topFact: '2.9 Tons of CO2 produced per year',
+    yourResult: "You're using 3.2 tons of CO2/ year",
+    continueText: "Let's take a look at how you do in the home category..."
   },
   {
     screenNumber: 7,
     screenType: 'question',
-    question: 'This is question 2'
+    sectionName: 'Home',
+    question: 'This is question 1',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
   },
   {
     screenNumber: 8,
     screenType: 'question',
-    question: 'This is question 3'
+    sectionName: 'Home',
+    question: 'This is question 2',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
   },
   {
     screenNumber: 9,
     screenType: 'question',
-    question: 'This is question 4'
+    sectionName: 'Home',
+    question: 'This is question 3',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
   },
   {
     screenNumber: 10,
+    screenType: 'question',
+    sectionName: 'Home',
+    question: 'This is question 4',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+  {
+    screenNumber: 11,
+    screenType: 'question',
+    sectionName: 'Home',
+    question: 'This is question 5',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+  {
+    screenNumber: 12,
     screenType: 'endscreen',
+    sectionName: 'Home',
     topFact: 'This the top fact',
     yourResult: 'This is your result',
     continueText: "Let's take a look at how you do in the travel category"
   },
   {
-    screenNumber: 11,
-    screenType: 'question',
-    question: 'This is question 1'
-  },
-  {
-    screenNumber: 12,
-    screenType: 'question',
-    question: 'This is question 2'
-  },
-  {
     screenNumber: 13,
     screenType: 'question',
-    question: 'This is question 3'
+    sectionName: 'Travel',
+    question: 'This is question 1',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
   },
   {
     screenNumber: 14,
     screenType: 'question',
-    question: 'This is question 4'
+    sectionName: 'Travel',
+    question: 'This is question 2',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
   },
   {
     screenNumber: 15,
+    screenType: 'question',
+    sectionName: 'Travel',
+    question: 'This is question 3',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+  {
+    screenNumber: 16,
+    screenType: 'question',
+    sectionName: 'Travel',
+    question: 'This is question 4',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+  {
+    screenNumber: 17,
+    screenType: 'question',
+    sectionName: 'Travel',
+    question: 'This is question 5',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+  {
+    screenNumber: 18,
     screenType: 'endscreen',
+    sectionName: 'Travel',
     topFact: 'This the top fact',
     yourResult: 'This is your result',
     continueText: "Let's take a look at how you do in the other category"
   },
   {
-    screenNumber: 16,
-    screenType: 'question',
-    question: 'This is question 1'
-  },
-  {
-    screenNumber: 17,
-    screenType: 'question',
-    question: 'This is question 2'
-  },
-  {
-    screenNumber: 18,
-    screenType: 'question',
-    question: 'This is question 3'
-  },
-  {
     screenNumber: 19,
     screenType: 'question',
-    question: 'This is question 4'
+    sectionName: 'Other',
+    question: 'This is question 1',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
   },
   {
     screenNumber: 20,
+    screenType: 'question',
+    sectionName: 'Other',
+    question: 'This is question 2',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+  {
+    screenNumber: 21,
+    screenType: 'question',
+    sectionName: 'Other',
+    question: 'This is question 3',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+  {
+    screenNumber: 22,
+    screenType: 'question',
+    sectionName: 'Other',
+    question: 'This is question 4',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+  {
+    screenNumber: 23,
+    screenType: 'question',
+    sectionName: 'Other',
+    question: 'This is question 5',
+    answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+  },
+
+  {
+    screenNumber: 24,
     screenType: 'completed',
+    sectionName: 'Other',
     topFact: 'This the top fact',
     yourResult: 'This is your result',
     continueText: 'Thank you for compeleting the survey'
   }
 ];
 
-// Actual componennt starts here - maybe extract the above
-
 class Survey extends Component {
   state = {
-    sectionNum: 0,
-    questionNum: 0,
     currentScreen: 0,
-    screenType: 'Description'
+    screenType: 'Description',
+    questionNum: 1,
+    screens: []
   };
 
   goToNextScreen = () => {
     this.setState({ currentScreen: this.state.currentScreen + 1 });
   };
 
+  countQuestions = () => {
+    this.setState({ questionNum: this.state.questionNum + 1 });
+  };
+
+  async componentWillMount() {
+    const getSurveyData = async () => {
+      const response = await fetch('http://localhost:5000/api/surveys/basic');
+      const json = await response.json();
+      return json;
+    };
+
+    const surveyData = await getSurveyData();
+    this.setState({ screens: surveyData.screens });
+    console.log('logging state.screens');
+    console.log(this.state.screens);
+    console.log('logging cheat.screens');
+    console.log(screens);
+    console.log(screens == this.state.screens);
+    console.log(screens[0]);
+    console.log(this.state.screens[0]);
+  }
+
   render() {
     return (
       <Fragment>
-        Current screen number: {this.state.currentScreen}
         <Screen
           data={screens[this.state.currentScreen]}
           goToNextScreen={this.goToNextScreen}
+          currentScreen={this.state.currentScreen}
+          countQuestions={this.countQuestions}
+          questionNum={this.state.questionNum}
         />
       </Fragment>
     );

@@ -3,41 +3,15 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 const Survey = require('../../models/Survey');
+const SurveyBasic = require('../../models/SurveyBasic');
 
-router.get('/test', (req, res) => {
-  res.send({ greeting: 'THIS IS THE VALUE FOR MESSAGE KEY' });
-  console.log('it worked');
-});
-
-router.get('/default', async (req, res) => {
-  const survey = await Survey.findOne({ surveyName: 'default4' });
-
-  console.log(survey.surveyTagLine);
-
-  res.send({ survey });
-});
-
-// @route   GET api/surveys
-// @desc    Get demo survey
-// @access  Public
-router.get('/demo', async (req, res) => {
-  console.log('trying...!');
-
-  const survey = await Survey.findOne({ surveyName: 'demo' });
-
-  console.log(survey);
-  //return res.send(survey);
-  return res.json(survey);
-
-  //return res.send('hi there');
-});
-
-// @route   POST api/surveys
+// @route   POST api/surveys/new
 // @desc    Create a new survey
 // @access  Public
 router.post(
-  '/',
+  '/new',
   [
+    // Make sure survey has a name before insert to db
     check('surveyName', 'Survey must have a name')
       .not()
       .isEmpty()
@@ -53,7 +27,7 @@ router.post(
     const surveyName = req.body.surveyName;
 
     try {
-      let survey = await Survey.findOne({ surveyName });
+      let survey = await SurveyBasic.findOne({ surveyName });
 
       // If survey with this name already in db return error
       if (survey) {
@@ -62,7 +36,7 @@ router.post(
           .json({ errors: [{ msg: 'Survey with this name already exists' }] });
       }
 
-      survey = new Survey({
+      survey = new SurveyBasic({
         surveyName
       });
 
@@ -75,5 +49,23 @@ router.post(
     }
   }
 );
+
+//@route   GET api/surveys/basic
+// @desc    Get default survey
+// @access  Public
+router.get('/basic', async (req, res) => {
+  console.log('getting basic survey from db...');
+
+  const survey = await SurveyBasic.findOne({ surveyName: 'Survey basic 1' });
+
+  return res.json(survey);
+});
+
+//@route   GET api/surveys/test
+// @desc    Test route
+// @access  Public
+router.get('/test', (req, res) => {
+  return res.send('test worked');
+});
 
 module.exports = router;

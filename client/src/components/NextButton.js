@@ -1,15 +1,22 @@
 import React from 'react';
-import Background from '../images/Background.png';
 
-const NextButton = ({ buttonText, goToNextScreen }) => {
+const NextButton = ({
+  buttonText,
+  goToNextScreen,
+  countQuestions,
+  resetButtons
+}) => {
   return (
-    <button>
-      <div className='nextbutton'>
-        <div className='nextbuttontext' onClick={goToNextScreen}>
-          {buttonText}
-        </div>
-      </div>
-    </button>
+    <div
+      className='nextbutton'
+      onClick={() => {
+        goToNextScreen();
+        countQuestions();
+        resetButtons();
+      }}
+    >
+      <div className='nextbuttontext'>{buttonText}</div>
+    </div>
   );
 };
 

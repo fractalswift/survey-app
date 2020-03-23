@@ -9,17 +9,18 @@ import Admin from './Admin';
 import './App.css';
 
 const App = () => (
-  <Router>
-    <div>App</div>
-    <Fragment>
-      <Route
-        exact
-        path='/'
-        render={props => <Survey {...props} surveyName='demo' />}
-      />
-      <Route exact path='/admin' component={Admin} />
-    </Fragment>
-  </Router>
+  <div className='container'>
+    <Router>
+      <Fragment>
+        <Route
+          exact
+          path='/'
+          render={props => <Survey {...props} surveyName='demo' />}
+        />
+        <Route exact path='/admin' component={Admin} />
+      </Fragment>
+    </Router>
+  </div>
 );
 
 export default App;
