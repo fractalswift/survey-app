@@ -2,7 +2,7 @@ How to use:
 
     Simply git clone this repo then:
 
-    You will need to set up mongo db locally (or you have received mongoDB atlas details from me) in which case simply place these details in config/default.js
+    You will need to set up mongo db locally (or you have received mongoDB atlas details from me) - place mongoDbURI details in config/default.json
 
     If setting up locally, you need to make the default survey by passing an object
     that matches the SurveyBasic schema to http://localhost:5000/routes/api/survey/new
@@ -16,3 +16,4 @@ Tools used:
     Concurrently for starting backend/frontend dev servers at same time
     Express-Validator - for checking data before submission to DB
     React-router-dom - for directing to admin/default survey on landing
+    Postman - for testing backend routes
