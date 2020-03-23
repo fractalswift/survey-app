@@ -3,6 +3,9 @@ import NextButton from './NextButton';
 import ProgressBar from './ProgressBar';
 import ButtonsPanel from './ButtonsPanel';
 
+// TODO make it so that Next screen button is greyed out
+// and inactive OR says "skip" if no answer has been selected
+
 class Question extends Component {
   // State controls appearance of buttons (pressed/unpressd)
   state = {
