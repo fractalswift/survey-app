@@ -1,12 +1,12 @@
 import React from 'react';
 
-// TODO finish admin page once fixed fetch
+// TODO admin page so surveys can be created
 
 const Admin = () => {
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <h2>Admin</h2>
-      <p>All fields required...</p>
+      <p>Admin page for creating and editing surveys.</p>
     </div>
   );
 };

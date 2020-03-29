@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
-import Button from './Button';
+import AnswerButton from './AnswerButton';
 
 export default class ButtonsPanel extends Component {
   render() {
     return (
       <div className='buttons-panel'>
-        <Button
+        <AnswerButton
           answer={this.props.answers[0]}
           status={this.props.button1}
           chooseAnswer={() => {
             this.props.chooseAnswer(0);
           }}
         />
-        <Button
+        <AnswerButton
           answer={this.props.answers[2]}
           status={this.props.button2}
           chooseAnswer={() => {
             this.props.chooseAnswer(1);
           }}
         />
-        <Button
+        <AnswerButton
           answer={this.props.answers[1]}
           status={this.props.button3}
           chooseAnswer={() => {
             this.props.chooseAnswer(2);
           }}
         />
-        <Button
+        <AnswerButton
           answer={this.props.answers[3]}
           status={this.props.button4}
           chooseAnswer={() => {

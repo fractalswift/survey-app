@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Startscreen from './Startscreen';
 
-import Question from './Question';
+import QuestionScreen from './QuestionScreen';
 
 import Endscreen from './Endscreen';
 
@@ -23,6 +23,19 @@ export default class Screen extends Component {
 
     // conditional rendering based on screen type (from survey schema)
     switch (screenType) {
+      case 'loading':
+        return (
+          <Startscreen
+            tagLine={tagLine}
+            description={description}
+            goToNextScreen={() => {
+              window.location.reload(false);
+              //would break application if we try to go to
+              //next screen before survey has loaded
+              // so button will refresh page instead
+            }}
+          />
+        );
       case 'description':
         return (
           <Startscreen
@@ -33,7 +46,7 @@ export default class Screen extends Component {
         );
       case 'question':
         return (
-          <Question
+          <QuestionScreen
             question={question}
             answers={answers}
             goToNextScreen={this.props.goToNextScreen}
