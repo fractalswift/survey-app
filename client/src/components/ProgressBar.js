@@ -12,6 +12,7 @@ export default class ProgressBar extends Component {
   };
 
   render() {
+    console.log(`current section is ${this.props.sectionNum}`);
     return (
       <div className='progress-bar'>
         <div className='progress-rectangles'>

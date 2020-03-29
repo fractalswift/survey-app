@@ -5,6 +5,7 @@ class Survey extends Component {
   // populate state with dummy screen to avoid errors
   state = {
     currentScreen: 0,
+    sectionNum: 0,
     screenType: 'Description',
     questionNum: 1,
     screens: [
@@ -47,6 +48,7 @@ class Survey extends Component {
           currentScreen={this.state.currentScreen}
           countQuestions={this.countQuestions}
           questionNum={this.state.questionNum}
+          sectionNum={this.state.sectionNum}
         />
       </Fragment>
     );

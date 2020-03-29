@@ -127,6 +127,17 @@
   background: #dbdbdb;
 }
 
+.rectangle-current {
+  width: 40px;
+  height: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  background: #f2a7b1;
+}
+
 .rectangle-label {
   display: flex;
   justify-content: center;

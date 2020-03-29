@@ -70,6 +70,7 @@ class Question extends Component {
           progress2={this.progress2}
           progress3={this.progress3}
           progress4={this.progress4}
+          sectionNum={this.props.sectionNum}
         />
         <div className='question-text'>{question}</div>
         <ButtonsPanel
