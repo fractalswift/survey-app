@@ -28,7 +28,7 @@ class Survey extends Component {
   };
 
   // Fetch survey from back end
-  async componentWillMount() {
+  async componentDidMount() {
     const getSurveyData = async () => {
       const response = await fetch('http://localhost:5000/api/surveys/basic');
       const json = await response.json();
