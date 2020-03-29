@@ -6,7 +6,7 @@ const Admin = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <h2>Admin</h2>
-      <p>Admin page for creating and editing surveys.</p>
+      <p>// TODO Admin page for creating and editing surveys.</p>
     </div>
   );
 };
