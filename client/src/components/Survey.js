@@ -12,7 +12,8 @@ class Survey extends Component {
         screenNumber: 0,
         screenType: 'description',
         tagLine: 'Loading...',
-        description: 'Survey is loading...'
+        description:
+          'Survey is loading... if you do not see the survey in a few seconds, please refresh the page.'
       }
     ]
   };

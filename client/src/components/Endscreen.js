@@ -20,30 +20,28 @@ const Endscreen = ({
           buttonText={'Continue'}
           goToNextScreen={goToNextScreen}
           countQuestions={() => {
-            console.log('Not counting as question');
+            //pass - do not increment question count
           }}
           resetButtons={() => {
-            console.log('no reset function passed');
+            //pass - do not increment question count
           }}
         />
       );
-    } else return <div>Thank you!</div>;
+    } else return <div className='thank-you-message'></div>;
   };
 
-  console.log(`Sectionname from endscreen: ${sectionName}`);
-
   return (
-    <div>
+    <div className='endscreen'>
       <EndHeader sectionName={sectionName} />
 
-      <div className='ukaverage'>UK national average: {topFact}</div>
+      <div className='average'>UK national average: {topFact}</div>
 
       <ScoreSlider />
 
-      <div className='sliderDescription'>
+      <div className='slider-description'>
         <div>{yourResult}</div>
       </div>
-      <div className='continueText'>
+      <div className='continue-text'>
         <div>{continueText}</div>
       </div>
       <div>{renderNextButton()}</div>

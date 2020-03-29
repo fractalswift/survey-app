@@ -32,7 +32,7 @@ export default class ProgressBar extends Component {
             progress={this.renderProgress(15)}
           />
         </div>
-        <div className='questionNumber'>
+        <div className='question-number'>
           Question {this.props.questionNum} of 20
         </div>
       </div>
