@@ -21,8 +21,6 @@ export default class Screen extends Component {
       topFact
     } = this.props.data;
 
-    console.log(`sectionName from Screen: ${sectionName}`);
-
     // conditional rendering based on screen type (from survey schema)
     switch (screenType) {
       case 'description':

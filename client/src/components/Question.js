@@ -62,7 +62,7 @@ class Question extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className='questionscreen'>
         <ProgressBar
           currentScreen={currentScreen}
           questionNum={this.props.questionNum}
@@ -71,7 +71,7 @@ class Question extends Component {
           progress3={this.progress3}
           progress4={this.progress4}
         />
-        <div className='questionText'>{question}</div>
+        <div className='question-text'>{question}</div>
         <ButtonsPanel
           answers={this.props.answers}
           chooseAnswer={this.chooseAnswer}

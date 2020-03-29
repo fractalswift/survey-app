@@ -13,14 +13,14 @@ export default class ButtonsPanel extends Component {
           }}
         />
         <Button
-          answer={this.props.answers[1]}
+          answer={this.props.answers[2]}
           status={this.props.button2}
           chooseAnswer={() => {
             this.props.chooseAnswer(1);
           }}
         />
         <Button
-          answer={this.props.answers[2]}
+          answer={this.props.answers[1]}
           status={this.props.button3}
           chooseAnswer={() => {
             this.props.chooseAnswer(2);

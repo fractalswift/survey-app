@@ -17,9 +17,11 @@ const Startscreen = ({ tagLine, description, goToNextScreen }) => {
         buttonText={'Take the survey'}
         goToNextScreen={goToNextScreen}
         countQuestions={() => {
-          console.log('Not counting as question');
+          //pass - do not increment question count
         }}
-        resetButtons={() => console.log('no reset function passed')}
+        resetButtons={() => {
+          //pass - do not increment question count
+        }}
       />
     </div>
   );
